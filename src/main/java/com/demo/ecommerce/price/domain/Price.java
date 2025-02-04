@@ -19,7 +19,9 @@ import lombok.NoArgsConstructor;
  * about applicable price lists, priorities, and validity periods.
  * 
  * <p>The {@link lombok.NoArgsConstructor} annotation is required for
- * Jackson deserialization, ensuring compatibility with JSON data structures.
+ * Jackson deserialization, ensuring compatibility with JSON data structures. Additionally,
+ * {@link lombok.Data} is used instead of {@link lombok.Value} or Java {@code record},
+ * because JPA entity classes require mutability for ORM operations.
  */
 @Entity
 @Table(name = "PRICES")
