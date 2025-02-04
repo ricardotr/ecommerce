@@ -12,7 +12,15 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
+/**
+ * Represents the pricing details for products within a specific brand.
+ * 
+ * <p>This entity maps to the "PRICES" table and includes information
+ * about applicable price lists, priorities, and validity periods.
+ * 
+ * <p>The {@link lombok.NoArgsConstructor} annotation is required for
+ * Jackson deserialization, ensuring compatibility with JSON data structures.
+ */
 @Entity
 @Table(name = "PRICES")
 @Data

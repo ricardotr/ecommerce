@@ -20,7 +20,19 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.Builder;
-
+/**
+ * Represents a simple domain model for the User entity.
+ * 
+ * <p>This class maps to the "app_user" table and contains
+ * essential user attributes such as username, password, and email.
+ * 
+ * <p>Additionaly, it contains a set of roles, which are mapped to the "user_roles" table.
+ * 
+ * <p>Jackson requires a no-args constructor to deserialize JSON data,
+ * that is why {@link lombok.NoArgsConstructor} is included. Additionally,
+ * {@link lombok.Data} is used instead of {@link lombok.Value} or Java {@code record},
+ * because JPA entity classes require mutability for ORM operations.
+ */
 @Entity
 @Table(name = "app_user")
 @Data

@@ -30,7 +30,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/ecommerce/v1/prices")
 public class PriceController {
     
-    @Operation(summary = "Get current prices based on various parameters. By default returns all current values paginated by 20 rows.")
+    @Operation(summary = "Get current prices based on various parameters. By default, it returns all current values, each with the highest priority, paginated in sets of 20 rows.")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Successfully retrieved price",
             content = @Content(mediaType = "application/json",
@@ -52,7 +52,7 @@ public class PriceController {
         @Parameter(name = "offset", in = ParameterIn.QUERY, required = false,
             description = "Offset for pagination. The default value is 20", example = "10")
     })
-    @GetMapping("/current")
+    @GetMapping
     public ResponseEntity<Object> getPrices(@RequestParam MultiValueMap<String, String> params) {
         log.info("Getting prices with params: {}", params);
         throw new RuntimeException("Not implemented yet");
