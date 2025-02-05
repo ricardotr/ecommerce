@@ -20,6 +20,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.Builder;
+
 /**
  * Represents a simple domain model for the User entity.
  * 

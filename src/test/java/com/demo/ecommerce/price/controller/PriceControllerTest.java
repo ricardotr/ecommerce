@@ -44,14 +44,18 @@ class PriceControllerTest extends BaseIntegrationTest {
     @ParameterizedTest
     @MethodSource("priceTestCases")
     void whenRequest_thenReturnCorrectPrice(TestCase testCase) throws Exception {
-        mockMvc.perform(get("/ecommerce/v1/prices/current")
+        mockMvc.perform(get("/ecommerce/v1/prices")
                 .param("applicationDate", testCase.request().applicationDate())
                 .param("productId", testCase.request().productId())
                 .param("brandId", testCase.request().brandId()))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.productId").value(testCase.expectedResponse.getProductId()))
-                .andExpect(jsonPath("$.brandId").value(testCase.expectedResponse.getBrandId()))
-                .andExpect(jsonPath("$.finalPrice").exists());
+                .andExpect(jsonPath("$.response[0].productId").value(testCase.expectedResponse.getProductId()))
+                .andExpect(jsonPath("$.response[0].brandId").value(testCase.expectedResponse.getBrandId()))
+                .andExpect(jsonPath("$.response[0].priceList").value(testCase.expectedResponse.getPriceList()))
+                .andExpect(jsonPath("$.response[0].startDate").value(testCase.expectedResponse.getStartDate().format(FORMATTER)))
+                .andExpect(jsonPath("$.response[0].endDate").value(testCase.expectedResponse.getEndDate().format(FORMATTER)))
+                .andExpect(jsonPath("$.response[0].price").value(testCase.expectedResponse.getPrice().stripTrailingZeros()))
+                .andExpect(jsonPath("$.response[0].currency").value(testCase.expectedResponse.getCurrency()));
                 
     }
 

@@ -7,7 +7,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.demo.ecommerce.price.controller.factory.CommonRequestDtoFactory;
 import com.demo.ecommerce.price.domain.Price;
+import com.demo.ecommerce.price.dto.CommonRequestDto;
+import com.demo.ecommerce.price.dto.PriceRequestDto;
+import com.demo.ecommerce.price.service.PriceService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -29,6 +33,12 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 @RequestMapping("/ecommerce/v1/prices")
 public class PriceController {
+
+    private final PriceService priceService;
+
+    public PriceController(PriceService priceService) {
+        this.priceService = priceService;
+    }
     
     @Operation(summary = "Get current prices based on various parameters. By default, it returns all current values, each with the highest priority, paginated in sets of 20 rows.")
     @ApiResponses(value = {
@@ -55,6 +65,7 @@ public class PriceController {
     @GetMapping
     public ResponseEntity<Object> getPrices(@RequestParam MultiValueMap<String, String> params) {
         log.info("Getting prices with params: {}", params);
-        throw new RuntimeException("Not implemented yet");
+        CommonRequestDto<PriceRequestDto> requestDto = CommonRequestDtoFactory.fromGetPricesRequestParamToDto(params);
+        return ResponseEntity.ok(priceService.getPrices(requestDto));
     }
 }

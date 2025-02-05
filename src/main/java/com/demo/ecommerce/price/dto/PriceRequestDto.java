@@ -1,21 +1,10 @@
 package com.demo.ecommerce.price.dto;
 
-import org.springframework.util.MultiValueMap;
+import java.time.LocalDateTime;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public record PriceRequestDto(
-    String applicationDate,
-    String productId,
-    String brandId,
-    Integer page,
-    Integer offset
-) {
-    public PriceRequestDto(MultiValueMap<String, String> params) {
-        this(
-            params.getFirst("applicationDate"),
-            params.getFirst("productId"),
-            params.getFirst("brandId"),
-            params.containsKey("page") ? Integer.parseInt(params.getFirst("page")) : null,
-            params.containsKey("offset") ? Integer.parseInt(params.getFirst("offset")) : null
-        );
-    }
-}
+    @JsonProperty("applicationDate") LocalDateTime applicationDate,
+    @JsonProperty("productId") Long productId,
+    @JsonProperty("brandId") Long brandId){}

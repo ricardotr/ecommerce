@@ -38,6 +38,7 @@ public class DataInitializer {
                 log.info("Initializing roles...");
                 Role userRole = Role.builder().name("APP_USER").build();
                 roleRepository.saveAll(List.of(userRole));
+                log.info("Initializing roles ends.");
             }
         };
     }
@@ -47,6 +48,7 @@ public class DataInitializer {
     CommandLineRunner initDefaultUser() {
         return args -> {
             if (userRepository.findByUsername("demouser").isEmpty()) {
+                log.info("Initializing default user...");
                 Role appUserRole = roleRepository.findByName("APP_USER")
                     .orElseThrow(() -> new IllegalArgumentException("Role not found"));
                 User appUser = new User();
@@ -55,6 +57,7 @@ public class DataInitializer {
                 appUser.setPassword(passwordEncoder.encode("demouser1"));
                 appUser.setRoles(Set.of(appUserRole));
                 userRepository.save(appUser);
+                log.info("Initializing default user ends.");
             }
         };
     }
