@@ -9,6 +9,6 @@ curl --location 'http://localhost:8080/api/auth/v1/login' --header 'Content-Type
 
 Luego utilizar el token para acceder al endpoint de Prices.
 
-curl --location 'http://localhost:8080/api/ecommerce/v1/prices?&&applicationDate=2020-06-15T17%3A00%3A00' --header 'Authorization: tokenJWS'
+curl --location 'http://localhost:8080/api/ecommerce/v1/prices?offset=20&page=0&brandId=1&productId=1&applicationDate=2020-06-15T17%3A00%3A00' --header 'Authorization: tokenJWS'
 
 Se puede confirmar la documentación de la API con el cliente swagger:
